@@ -13,16 +13,6 @@ const App = () => {
   const dispatch=useDispatch();
 
   useEffect(() => {
-    // async function fetchData() {
-    //   try {
-    //     const response = await fetch("https://fakestoreapi.com/products");
-    //     const data = await response.json();
-    //     // console.log("Fetched data:", data);
-    //     dispatch(setProducts(data));
-    //   } catch (error) {
-    //     console.log(error);
-    //   }
-    // }
     fetchData().then((data)=>{
       dispatch(setProducts(data));
     }).catch((err)=>console.log(err));
