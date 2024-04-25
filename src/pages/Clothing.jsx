@@ -1,9 +1,12 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useSelector } from 'react-redux'
 import Cards from '../components/Cards';
 
 const Clothing = () => {
-  const items = useSelector((state)=>state.products)
+  const items = useSelector((store)=>store.products)
+  // console.log(items)
+
+  
   return (
     <div>
         {items && items.length>0? (

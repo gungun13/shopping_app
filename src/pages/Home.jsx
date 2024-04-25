@@ -4,23 +4,8 @@ import { setProducts } from '../redux/Slices/ProductSlice';
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
 const Home = () => {
-    const dispatch=useDispatch();
     const items = useSelector((state)=>state.products);
 
-    useEffect(() => {
-        async function fetchData() {
-          try {
-            const response = await fetch("https://fakestoreapi.com/products");
-            const data = await response.json();
-            // console.log("Fetched data:", data);
-            dispatch(setProducts(data));
-          } catch (error) {
-            console.log(error);
-          }
-        }
-    
-        fetchData();
-      }, [dispatch]);
 
   return (
     <div>
