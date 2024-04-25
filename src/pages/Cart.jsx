@@ -2,13 +2,20 @@ import React, { useState, useEffect } from 'react';
 import { useSelector } from "react-redux";
 import { NavLink } from 'react-router-dom';
 import CartItem from '../components/CartItem';
+import { payNow } from '../Services/payment.js';
 
 const Cart = () => {
-    const { cart } = useSelector((state) => state);
+    const cart  = useSelector((state) => state.cart);
     const [amount, setAmount] = useState(0);
 
     useEffect(() => {
-        setAmount(cart.reduce((acc, curr) => acc + curr.price, 0));
+        // Calculate the total amount based on the items in the cart
+        const totalAmount = cart.reduce((acc, curr) => {
+            const quantity = curr.quantity || 1;
+            return acc + (curr.price * quantity);
+        }, 0);
+    
+        setAmount(totalAmount);
     }, [cart]);
 
     return (
@@ -24,11 +31,16 @@ const Cart = () => {
                         <div>
                             <div className="text-green-700 font-bold text-lg">YOUR CART</div>
                             <div className="text-green-700 font-bold mb-2 text-3xl">SUMMARY</div>
-                            <p className="text-gray-700 font-bold text-xl"><span className="text-gray-500 font-semibold text-xl">Total Items:</span> {cart.length}</p>
+                            <p className="text-gray-700 font-bold text-xl"><span className="text-gray-500 font-semibold text-xl">Total Items:</span>
+                            {cart.reduce((acc,curr)=>{
+                                const quantity=curr.quantity || 1
+                                return acc+quantity
+                            },0)}
+                            </p>
                         </div>
                         <div>
                             <p className="text-green-700 font-bold mb-2 text-2xl"><span className="text-gray-700 font-semibold text-2xl">Total Amount:</span> ${amount.toFixed(2)}</p>
-                            <button className="bg-green-600 text-white px-24 py-2 rounded-md hover:bg-green-700">Checkout Now</button>
+                            <button className="bg-green-600 text-white px-24 py-2 rounded-md hover:bg-green-700" onClick={()=>payNow(amount)}>Checkout Now</button>
                         </div>
                     </div>
                 </div>

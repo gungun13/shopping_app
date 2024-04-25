@@ -5,7 +5,7 @@ import { NavLink } from 'react-router-dom';
 import logo from "../assets/logo.png";
 
 const Navbar = () => {
-  const {cart}=useSelector((state)=>state);
+  const cart=useSelector((state)=>state.cart);
   return (
     <div>
     
@@ -19,12 +19,22 @@ const Navbar = () => {
             <NavLink to="/">
                 <p>Home</p>
             </NavLink>
+            <NavLink to="/cloth">
+                <p>Clothes</p>
+            </NavLink>
+            <NavLink to="/electronics">
+                <p>Electronics</p>
+            </NavLink>
             <NavLink to="/cart">
                 <div className='relative'>
                     <FaShoppingCart className='text-2xl'/>
                     {cart.length>0 && 
-                    <span className='absolute -top-1 -right-2 bg-green-600 text-sm w-5 h-5 
-                    flex justify-center items-center animate-bounce rounded-full text-white'>{cart.length}</span>}
+                    <span className='absolute -top-1 -right-2 bg-green-600 text-sm w-5 h-5 flex justify-center items-center animate-bounce rounded-full text-white'>
+                      {cart.reduce((acc,curr)=>{
+                        const quantity=curr.quantity || 1;
+                        return  acc+quantity;
+                      },0)}
+                    </span>}
                 </div>
             </NavLink>
         </div>

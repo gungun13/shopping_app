@@ -16,7 +16,7 @@ const Cards = ({item}) => {
         toast.error("item removed from cart")
     }
   return (
-    <div className='flex flex-col items-center justify-between hover:scale-105 transition duration-300 ease-in gap-3 p-4 mt-10 ml-5 border rounded-xl border-gray-400 shadow-md '>
+    <div className='flex flex-col items-center justify-between hover:scale-105 transition duration-300 ease-in gap-3 p-5 mt-10 ml-5 border rounded-xl border-gray-400 shadow-md '>
         <div>
             <p className='text-gray-700 font-semibold text-lg text-left truncate w-40 mt-1'>{item.title}</p>
         </div>
