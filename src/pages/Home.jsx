@@ -1,28 +1,77 @@
-import React, { useState,useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import Cards from '../components/Cards';
+import { useDispatch, useSelector } from 'react-redux';
+import Navbar from '../components/Navbar';
+import Slider from "react-slick";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
+import SliderItem from '../components/SliderItem';
 import { setProducts } from '../redux/Slices/ProductSlice';
-import { useSelector } from 'react-redux';
-import { useDispatch } from 'react-redux';
+
 const Home = () => {
-    const items = useSelector((state)=>state.products);
+    const dispatch=useDispatch();
+    const items = useSelector((state) => state.products.items);
+    const filtered=useSelector((state)=>state.products.filteredItems);
 
+    useEffect(()=>{
+        dispatch(setProducts(items));
+    },[items])
 
-  return (
-    <div>
-        {items && items.length>0? (
-            <div className='grid xs:grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 max-w-6xl p-2 mx-auto space-y-10 space-x-5 min-h-[80vh]'>
+    const settings = {
+        dots: true,
+        infinite: true,
+        speed: 500,
+        slidesToShow: 1,
+        slidesToScroll: 1
+    }
+
+    const getRandomItems = (items,num) => {
+        const randomItems = [];
+        for (let i = 0; i <num; i++) {
+            const randomItem = items[Math.floor(Math.random() * items.length)];
+            randomItems.push(randomItem);
+        }
+        return randomItems;
+    };
+
+    const randomItems = getRandomItems(items,5);
+
+    return (
+        <div className='container mx-auto '>
+            <div className='bg-slate-900'>
+                <Navbar/>
+            </div>
+            <div className="slider-container px-8 pt-6 bg-gray-200">
+                <Slider {...settings}>
+                    {randomItems.map((item) => (
+                        item && item.id && ( // Check if item has an id before rendering
+                            <div key={item.id}>
+                                <SliderItem item={item} />
+                            </div>
+                        )
+                    ))}
+                </Slider>
+            </div>
+            
+            {items.length===0?
+            (<p>Loading...</p>):(filtered && filtered.length > 0 ? (
+                <div className='grid xs:grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 p-2 mx-auto space-y-10 space-x-5 min-h-[80vh]'>
                     {
-                        items.map((item)=>(
-                            <Cards key={item.id} item={item}/>
+                        filtered.map((item) => (
+                            <Cards key={item.id} item={item} />
                         ))
                     }
                 </div>
-        ):
-        <p>loading...</p>
-        }
-         
-    </div>
-  )
+            ):(
+                <p>No result found</p>
+            )
+            )}
+
+            
+        </div>
+    )
 }
 
-export default Home
+export default Home;
+
+

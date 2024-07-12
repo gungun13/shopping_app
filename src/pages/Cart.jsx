@@ -3,6 +3,7 @@ import { useSelector } from "react-redux";
 import { NavLink } from 'react-router-dom';
 import CartItem from '../components/CartItem';
 import { payNow } from '../Services/payment.js';
+import Navbar from '../components/Navbar.jsx';
 
 const Cart = () => {
     const cart  = useSelector((state) => state.cart);
@@ -19,6 +20,10 @@ const Cart = () => {
     }, [cart]);
 
     return (
+        <div>
+        <div className='bg-slate-900'>
+            <Navbar/>
+        </div>
         <div className="mx-auto px-4 py-8 max-w-6xl">
             {cart.length > 0 ? (
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
@@ -47,11 +52,12 @@ const Cart = () => {
             ) : (
                 <div className=" flex flex-col justify-center items-center mt-12">
                     <h1 className="text-3xl font-bold mb-4">Cart Empty</h1>
-                    <NavLink to="/" className="text-blue-500 hover:underline">
+                    <NavLink to="/home" className="text-blue-500 hover:underline">
                         <button className="bg-green-600 text-lg text-white px-6 py-2 rounded-md hover:bg-green-700">Shop Now</button>
                     </NavLink>
                 </div>
             )}
+        </div>
         </div>
     );
 }
