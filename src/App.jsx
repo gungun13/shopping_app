@@ -24,8 +24,19 @@ const App = () => {
     }).catch((err)=>console.log(err));
   }, []);
   return (
-    <div>
-          <Routes>
+    <div> 
+          {/* <Routes> */}
+            {/* <Route path="/" element={<Home />} /> */}
+            {/* <Route path="/cart" element={<Cart />} />
+            <Route path="/cloth" element={<Clothing/>} />
+            <Route path="/electronics" element={<Electronics/>} />
+            <Route path="/jewellery" element={<Jewellery/>} />
+            {isAuthenticated ?(<Route path="/" element={<Home/>}/>):(<Route path="/" element={<FrontPage />} />)} */}
+            {/* <Route path="/" element={<FrontPage/>}/> */}
+            {/* <Route path="/product/:id" element={<SingleCard/>} />
+          </Routes> */}
+
+<Routes>
             <Route path="/home" element={<Home />} />
             <Route path="/cart" element={<Cart />} />
             <Route path="/cloth" element={<Clothing/>} />
@@ -34,6 +45,7 @@ const App = () => {
             <Route path="/" element={<FrontPage/>}/>
             <Route path="/product/:id" element={<SingleCard/>} />
           </Routes>
+          
     </div>
   );
 };

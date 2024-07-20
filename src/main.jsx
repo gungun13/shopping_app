@@ -8,7 +8,6 @@ import { BrowserRouter } from 'react-router-dom'
 import {Toaster} from "react-hot-toast";
 import { Auth0Provider } from '@auth0/auth0-react';
 
-
 ReactDOM.createRoot(document.getElementById('root')).render(
   // <React.StrictMode>
     <BrowserRouter>
@@ -16,7 +15,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
     domain="dev-xjqvi8t0xz23hzfb.us.auth0.com"
     clientId="EPzu42v9isCLBJD7QoJm1rjB3C42GljG"
     authorizationParams={{
-      redirect_uri: window.location.origin+'/home'
+       redirect_uri: window.location.origin+'/home'
     }}
 
   >

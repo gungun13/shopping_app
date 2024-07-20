@@ -3,7 +3,8 @@ import { useAuth0 } from "@auth0/auth0-react";
 import a from "../assets/a.png";
 
 const FrontPage = () => {
-  const { loginWithRedirect } = useAuth0();
+  const { user,loginWithRedirect } = useAuth0();
+  console.log("current user",user);
 
   return (
     <div className="flex bg-gray-200">
@@ -25,7 +26,7 @@ const FrontPage = () => {
                   <div className="mt-10 flex flex-wrap items-center justify-center gap-y-4 gap-x-6 sm:flex-nowrap sm:gap-y-4 lg:justify-start">
                     <button
                       className="rounded-md bg-blue-600 px-5 py-2 text-base font-semibold text-xl leading-7 text-white shadow-sm transition-all hover:bg-blue-700 sm:w-fit"
-                      onClick={() => loginWithRedirect()}
+                      onClick={(e) => loginWithRedirect()}
                     >
                       Login 
                     </button>
