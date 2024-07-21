@@ -16,7 +16,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
     domain="dev-xjqvi8t0xz23hzfb.us.auth0.com"
     clientId={import.meta.env.VITE_DEPLOYED_CLIENT_ID}
     authorizationParams={{
-       redirect_uri: window.location.origin
+       redirect_uri: window.location.origin+'/home'
     }}
 
   >
