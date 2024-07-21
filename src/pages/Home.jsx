@@ -7,11 +7,15 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import SliderItem from '../components/SliderItem';
 import { setProducts } from '../redux/Slices/ProductSlice';
+import { useAuth0 } from "@auth0/auth0-react";
 
 const Home = () => {
     const dispatch=useDispatch();
     const items = useSelector((state) => state.products.items);
     const filtered=useSelector((state)=>state.products.filteredItems);
+
+    const { user} = useAuth0();
+    console.log("current user",user);
 
     useEffect(()=>{
         dispatch(setProducts(items));
